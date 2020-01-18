@@ -5,9 +5,8 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && electron-builder --macos",
     "electron-start": "electron .",
-    "electron-pack": "npm run build && electron-builder --macos",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -16,6 +15,7 @@
     "react-scripts": "3.3.0"
   },
   "devDependencies": {
+    "@types/react": "16.9.17",
     "electron": "7.1.9",
     "electron-builder": "22.2.0",
     "typescript": "3.7.5"
