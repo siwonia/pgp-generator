@@ -3,13 +3,22 @@ import styled from "styled-components";
 
 interface Props {
   title: string;
+  valueRef?: React.MutableRefObject<string>;
+  value?: string;
 }
 
 const TextArea: FunctionComponent<Props> = props => {
   return (
     <Main>
       <Header>{props.title}</Header>
-      <Box />
+      <Box
+        value={props.value}
+        onChange={event => {
+          if (props.valueRef) {
+            props.valueRef.current = event.target.value;
+          }
+        }}
+      />
     </Main>
   );
 };
