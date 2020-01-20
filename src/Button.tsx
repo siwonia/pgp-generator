@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 interface Props {
   title: string;
+  onClick: () => void;
 }
 
 const Button: FunctionComponent<Props> = props => {
-  return <Main>{props.title}</Main>;
+  return <Main onClick={props.onClick}>{props.title}</Main>;
 };
 
 export default Button;
@@ -22,7 +23,7 @@ const Main = styled.button`
   font-size: 14px;
   outline: none;
   box-shadow: none;
-  :active{
+  :active {
     background-color: #204eab;
- }
+  }
 `;
