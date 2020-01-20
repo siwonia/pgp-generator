@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TextArea from "./TextArea";
 import Row from "./Row";
 import Column from "./Column";
+import Button from "./Button";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Column>
           <TextArea title="Public Key" />
           <TextArea title="Message" />
+          <Button title="Encode" />
         </Column>
         <Column>
           <TextArea title="Encoded Message" />

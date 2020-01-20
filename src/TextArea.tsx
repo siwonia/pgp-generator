@@ -25,16 +25,19 @@ const Main = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #000;
+  background-color: #09111f;
   text-align: center;
   color: #fff;
   padding: 10px;
+  font-size: 14px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 const Box = styled.textarea`
   display: flex;
   flex: 1;
-  background-color: #383d47;
+  background-color: #151c29;
   color: #fff;
   padding: 10px;
   border: none;
@@ -42,5 +45,7 @@ const Box = styled.textarea`
   outline: none;
   box-shadow: none;
   resize: none;
-  font-size: 13px;
+  font-size: 12px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 `;
