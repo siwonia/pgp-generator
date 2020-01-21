@@ -7,28 +7,34 @@ import * as openpgp from "openpgp";
 
 function EncryptView() {
   const publicKeyRef = useRef("");
-  const messageRef = useRef("");
+  const decrptedMessageRef = useRef("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
 
   async function encryptMessage() {
-    const keyResult = await openpgp.key.readArmored(publicKeyRef.current);
-    const encryptResult = await openpgp.encrypt({
-      message: openpgp.message.fromText(messageRef.current),
-      publicKeys: keyResult.keys,
-    });
+    try {
+      const publicKeyResult = await openpgp.key.readArmored(
+        publicKeyRef.current
+      );
+      const encryptResult = await openpgp.encrypt({
+        message: openpgp.message.fromText(decrptedMessageRef.current),
+        publicKeys: publicKeyResult.keys
+      });
 
-    setEncryptedMessage(encryptResult.data);
+      setEncryptedMessage(encryptResult.data);
+    } catch (error) {
+      setEncryptedMessage(error.message);
+    }
   }
 
   return (
     <Row>
       <Column>
         <TextArea title="Public Key" valueRef={publicKeyRef} />
-        <TextArea title="Message" valueRef={messageRef} />
-        <Button title="Encrypt" onClick={encryptMessage} />
+        <TextArea title="Decrypted Message" valueRef={decrptedMessageRef} />
       </Column>
       <Column>
         <TextArea title="Encrypted Message" value={encryptedMessage} />
+        <Button title="Encrypt" onClick={encryptMessage} />
       </Column>
     </Row>
   );

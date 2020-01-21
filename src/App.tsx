@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import EncryptView from "./EncryptView";
+import DecryptView from "./DecryptView"
 
 function App() {
   return (
     <Main>
-      <EncryptView />
+      <DecryptView />
     </Main>
   );
 }
