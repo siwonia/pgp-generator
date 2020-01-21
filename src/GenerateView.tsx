@@ -18,6 +18,11 @@ function GenerateView() {
 
     try {
       setIsLoading(true);
+
+      if (!passphraseRef.current) {
+        throw new Error("Missing passphrase!");
+      }
+
       const generateKeyResult = await openpgp.generateKey({
         userIds: [{}],
         passphrase: passphraseRef.current

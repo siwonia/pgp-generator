@@ -12,11 +12,23 @@ function EncryptView() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function encryptMessage() {
+    if (isLoading) {
+      return;
+    }
+
     try {
       setIsLoading(true);
       const publicKeyResult = await openpgp.key.readArmored(
         publicKeyRef.current
       );
+
+      if (publicKeyResult.err || publicKeyResult.keys.length === 0) {
+        throw new Error("Public key missing or broken!");
+      }
+
+      if (!decrptedMessageRef.current) {
+        throw new Error("Missing message to enrypt");
+      }
 
       const encryptResult = await openpgp.encrypt({
         message: openpgp.message.fromText(decrptedMessageRef.current),
@@ -35,7 +47,7 @@ function EncryptView() {
     <Row>
       <Column>
         <TextArea title="Public Key" valueRef={publicKeyRef} />
-        <TextArea title="Decrypted Message" valueRef={decrptedMessageRef} />
+        <TextArea title="Message" valueRef={decrptedMessageRef} />
       </Column>
       <Column isLoading={isLoading}>
         <TextArea title="Encrypted Message" value={encryptedMessage} />

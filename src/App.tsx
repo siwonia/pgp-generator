@@ -75,7 +75,7 @@ const HeaderButton = styled.a<{ isSelected: boolean }>`
       background-color: #2b5ec5;
     `}
   color: #fff;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 14px;
   border-top: 1px solid #2b5ec5;
   border-bottom: 1px solid #2b5ec5;
