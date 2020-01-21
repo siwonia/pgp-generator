@@ -3,6 +3,7 @@ import TextArea from "./TextArea";
 import Row from "./Row";
 import Column from "./Column";
 import Button from "./Button";
+import * as openpgp from "openpgp";
 
 function EncryptView() {
   const publicKeyRef = useRef("");
@@ -10,7 +11,13 @@ function EncryptView() {
   const [encryptedMessage, setEncryptedMessage] = useState("");
 
   async function encryptMessage() {
-    setEncryptedMessage(Math.random().toFixed(10));
+    const keyResult = await openpgp.key.readArmored(publicKeyRef.current);
+    const encryptResult = await openpgp.encrypt({
+      message: openpgp.message.fromText(messageRef.current),
+      publicKeys: keyResult.keys,
+    });
+
+    setEncryptedMessage(encryptResult.data);
   }
 
   return (
