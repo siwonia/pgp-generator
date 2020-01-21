@@ -5,8 +5,6 @@ import Column from "./Column";
 import Button from "./Button";
 import * as openpgp from "openpgp";
 
-const xPassphrase = "test";
-
 function DecryptView() {
   const privateKeyRef = useRef("");
   const passphraseRef = useRef("");
@@ -21,6 +19,7 @@ function DecryptView() {
 
     try {
       setIsLoading(true);
+      openpgp.config.ignore_mdc_error = true;
       const privateKeyResult = await openpgp.key.readArmored(
         privateKeyRef.current
       );

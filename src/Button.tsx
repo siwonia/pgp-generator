@@ -21,6 +21,7 @@ const Main = styled.button`
   padding: 10px;
   border-radius: 5px;
   font-size: 14px;
+  cursor: pointer;
   outline: none;
   box-shadow: none;
   :active {
