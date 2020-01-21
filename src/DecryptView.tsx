@@ -26,8 +26,6 @@ function DecryptView() {
         privateKeys: privateKeyResult.keys
       });
 
-      console.log(decryptResult);
-
       setDecryptedMessage(decryptResult.data as string);
     } catch (error) {
       setDecryptedMessage(error.message);
