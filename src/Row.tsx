@@ -13,4 +13,6 @@ const Main = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+  margin-left: 5px;
+  margin-right: 5px;
 `;

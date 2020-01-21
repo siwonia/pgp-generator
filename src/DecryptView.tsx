@@ -10,25 +10,39 @@ function DecryptView() {
   const passphraseRef = useRef("");
   const encryptedMessageRef = useRef("");
   const [decryptedMessage, setDecryptedMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function decryptMessage() {
+    if (isLoading) {
+      return;
+    }
+
     try {
+      setIsLoading(true);
       const privateKeyResult = await openpgp.key.readArmored(
         privateKeyRef.current
       );
 
-      if (passphraseRef.current) {
-        await privateKeyResult.keys[0].decrypt(passphraseRef.current);
+      if (privateKeyResult.err || privateKeyResult.keys.length === 0) {
+        throw new Error("Private key missing or broken!");
       }
 
+      if (!passphraseRef.current) {
+        throw new Error("Missing passphrase!");
+      }
+
+      await privateKeyResult.keys[0].decrypt(passphraseRef.current);
+
       const decryptResult = await openpgp.decrypt({
-        message: openpgp.message.fromText(encryptedMessageRef.current),
+        message: await openpgp.message.readArmored(encryptedMessageRef.current),
         privateKeys: privateKeyResult.keys
       });
 
       setDecryptedMessage(decryptResult.data as string);
+      setIsLoading(false);
     } catch (error) {
       setDecryptedMessage(error.message);
+      setIsLoading(false);
     }
   }
 
@@ -36,10 +50,10 @@ function DecryptView() {
     <Row>
       <Column>
         <TextArea title="Private Key" valueRef={privateKeyRef} />
-        <TextArea title="Passphrase (optional)" valueRef={passphraseRef} />
+        <TextArea title="Passphrase" valueRef={passphraseRef} />
         <TextArea title="Encrypted Message" valueRef={encryptedMessageRef} />
       </Column>
-      <Column>
+      <Column isLoading={isLoading}>
         <TextArea title="Decrypted Message" value={decryptedMessage} />
         <Button title="Encrypt" onClick={decryptMessage} />
       </Column>

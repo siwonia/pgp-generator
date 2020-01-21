@@ -9,20 +9,25 @@ function EncryptView() {
   const publicKeyRef = useRef("");
   const decrptedMessageRef = useRef("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function encryptMessage() {
     try {
+      setIsLoading(true);
       const publicKeyResult = await openpgp.key.readArmored(
         publicKeyRef.current
       );
+
       const encryptResult = await openpgp.encrypt({
         message: openpgp.message.fromText(decrptedMessageRef.current),
         publicKeys: publicKeyResult.keys
       });
 
       setEncryptedMessage(encryptResult.data);
+      setIsLoading(false);
     } catch (error) {
       setEncryptedMessage(error.message);
+      setIsLoading(false);
     }
   }
 
@@ -32,7 +37,7 @@ function EncryptView() {
         <TextArea title="Public Key" valueRef={publicKeyRef} />
         <TextArea title="Decrypted Message" valueRef={decrptedMessageRef} />
       </Column>
-      <Column>
+      <Column isLoading={isLoading}>
         <TextArea title="Encrypted Message" value={encryptedMessage} />
         <Button title="Encrypt" onClick={encryptMessage} />
       </Column>
