@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   onClick: () => void;
 }
 
-const Button: FunctionComponent<Props> = props => {
+const Button: FC<Props> = props => {
   return <Main onClick={props.onClick}>{props.title}</Main>;
 };
 

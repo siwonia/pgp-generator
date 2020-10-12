@@ -18,19 +18,20 @@ function GenerateView() {
 
     try {
       setIsLoading(true);
+      setTimeout(async () => {
+        if (!passphraseRef.current) {
+          throw new Error("Missing passphrase!");
+        }
 
-      if (!passphraseRef.current) {
-        throw new Error("Missing passphrase!");
-      }
+        const generateKeyResult = await openpgp.generateKey({
+          userIds: [{}],
+          passphrase: passphraseRef.current,
+        });
 
-      const generateKeyResult = await openpgp.generateKey({
-        userIds: [{}],
-        passphrase: passphraseRef.current
+        setPrivateKey(generateKeyResult.privateKeyArmored);
+        setPublicKey(generateKeyResult.publicKeyArmored);
+        setIsLoading(false);
       });
-
-      setPrivateKey(generateKeyResult.privateKeyArmored);
-      setPublicKey(generateKeyResult.publicKeyArmored);
-      setIsLoading(false);
     } catch (error) {
       setPrivateKey(error.message);
       setPublicKey("");

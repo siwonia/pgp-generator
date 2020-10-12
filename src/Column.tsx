@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 interface Props {
   isLoading?: boolean;
 }
 
-const Column: FunctionComponent<Props> = props => {
+const Column: FC<Props> = props => {
   return (
     <Main
       style={{ opacity: props.isLoading ? 0.5 : 1 }}

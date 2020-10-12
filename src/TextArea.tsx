@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   value?: string;
 }
 
-const TextArea: FunctionComponent<Props> = props => {
+const TextArea: FC<Props> = props => {
   return (
     <Main>
       <Header>{props.title}</Header>

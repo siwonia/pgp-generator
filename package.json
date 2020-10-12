@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && electron-builder --macos",
-    "electron-start": "electron .",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build",
+    "build:macos": "react-scripts build && electron-builder --macos",
+    "electron-start": "electron ."
   },
   "dependencies": {
     "openpgp": "4.8.0",

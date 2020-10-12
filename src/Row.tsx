@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
-const Row: FunctionComponent = props => {
+const Row: FC = props => {
   return (
     <Main children={props.children} />
   );

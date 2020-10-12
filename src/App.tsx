@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import styled, { css } from "styled-components";
 import EncryptView from "./EncryptView";
 import DecryptView from "./DecryptView";
@@ -6,22 +6,22 @@ import GenerateView from "./GenerateView";
 
 interface Page {
   name: string;
-  view: JSX.Element;
+  View: FC;
 }
 
 const pages: Page[] = [
   {
     name: "Encrypt",
-    view: <EncryptView />
+    View: EncryptView,
   },
   {
     name: "Decrypt",
-    view: <DecryptView />
+    View: DecryptView,
   },
   {
     name: "Generate",
-    view: <GenerateView />
-  }
+    View: GenerateView,
+  },
 ];
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
   return (
     <Main>
       <Header>{renderHeaderButtons()}</Header>
-      {selectedPage.view}
+      {<selectedPage.View />}
     </Main>
   );
 }
@@ -69,7 +69,7 @@ const HeaderButton = styled.a<{ isSelected: boolean }>`
   display: flex;
   cursor: pointer;
   padding: 5px;
-  ${props =>
+  ${(props) =>
     props.isSelected &&
     css`
       background-color: #2b5ec5;

@@ -4,18 +4,22 @@ A useful macOS app for generating PGP keys and for encrypting and decrypting mes
 
 ![PGP Generator](https://github.com/schultka/pgp-generator/blob/master/screenshot.png)
 
-## Download
+## Links
 
-- [PGP Generator for macOS](https://github.com/schultka/pgp-generator/blob/master/pgp-generator-1.0.0.dmg?raw=true)
+- [Web Demo](http://tobias-schultka.com/projects/pgp/)
+- [Download for macOS](https://github.com/schultka/pgp-generator/blob/master/pgp-generator-1.0.0.dmg?raw=true)
 
 ## Development
 
 #### Setup
+
 - `$ npm i` - install project dependencies
 
 #### Run App
+
 - `$ npm start` - run dev environment
-- `$ npm run build` - build macOS app
+- `$ npm run build` - build web app
+- `$ npm run build:macos` - build macOS app
 
 ## Special thanks
 
