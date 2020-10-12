@@ -56,7 +56,7 @@ function DecryptView() {
       </Column>
       <Column isLoading={isLoading}>
         <TextArea title="Decrypted Message" value={decryptedMessage} />
-        <Button title="Encrypt" onClick={decryptMessage} />
+        <Button title="Decrypt" onClick={decryptMessage} />
       </Column>
     </Row>
   );
